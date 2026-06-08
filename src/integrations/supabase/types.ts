@@ -14,7 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      gallery_images: {
+        Row: {
+          caption: string | null
+          category: string
+          created_at: string
+          id: string
+          sort_order: number
+          storage_path: string
+        }
+        Insert: {
+          caption?: string | null
+          category: string
+          created_at?: string
+          id?: string
+          sort_order?: number
+          storage_path: string
+        }
+        Update: {
+          caption?: string | null
+          category?: string
+          created_at?: string
+          id?: string
+          sort_order?: number
+          storage_path?: string
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          city: string | null
+          created_at: string
+          id: string
+          mobile: string
+          monthly_bill: string | null
+          name: string
+          source: string
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          id?: string
+          mobile: string
+          monthly_bill?: string | null
+          name: string
+          source?: string
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          id?: string
+          mobile?: string
+          monthly_bill?: string | null
+          name?: string
+          source?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
