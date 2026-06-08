@@ -42,36 +42,42 @@ export function Navbar() {
             </div>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
             {NAV.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 activeOptions={{ exact: n.to === "/" }}
-                className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-primary rounded-md transition-colors"
-                activeProps={{ className: "px-3 py-2 text-sm font-semibold text-primary rounded-md" }}
+                className="whitespace-nowrap px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-medium text-foreground/80 hover:text-primary rounded-md transition-colors"
+                activeProps={{ className: "whitespace-nowrap px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-semibold text-primary rounded-md" }}
               >
                 {n.label}
               </Link>
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden xl:flex items-center gap-2">
             <a
               href={CONTACT.whatsappHref}
               target="_blank"
               rel="noreferrer"
-              className="px-4 py-2 text-sm font-semibold rounded-full border border-accent/30 text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
+              className="whitespace-nowrap px-4 py-2 text-sm font-semibold rounded-full border border-accent/30 text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
             >
               WhatsApp Now
             </a>
             <Link
               to="/contact"
-              className="px-4 py-2 text-sm font-semibold rounded-full gradient-primary text-primary-foreground shadow-soft hover:shadow-glow transition-shadow"
+              className="whitespace-nowrap px-4 py-2 text-sm font-semibold rounded-full gradient-primary text-primary-foreground shadow-soft hover:shadow-glow transition-shadow"
             >
               Free Site Survey
             </Link>
           </div>
+          <Link
+            to="/contact"
+            className="hidden lg:inline-flex xl:hidden whitespace-nowrap px-4 py-2 text-sm font-semibold rounded-full gradient-primary text-primary-foreground shadow-soft"
+          >
+            Free Survey
+          </Link>
 
           <button
             aria-label="Menu"
