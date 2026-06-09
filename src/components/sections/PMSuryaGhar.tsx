@@ -140,13 +140,13 @@ export function PMSuryaGharSection() {
               duration: 1.2,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-elegant hover:scale-[1.01] transition-transform duration-700"
+            className="lg:col-span-5 relative h-[800px] rounded-3xl overflow-hidden shadow-elegant"
           >
-            <img src={pm} alt="Prime Minister of India" className="w-full h-full object-cover aspect-[4/5]" width={1024} height={1280} loading="lazy" />
+            <img src={pm} alt="Prime Minister of India" className="absolute inset-0 w-full h-full object-cover object-center scale-116" width={1080} height={1280} loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/40 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-6 text-primary-foreground">
+            <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-primary via-primary/80 to-transparent text-primary-foreground">
               <div className="text-[10px] uppercase tracking-widest text-accent-glow font-semibold">PM Modi</div>
-              <blockquote className="mt-2 text-sm lg:text-base italic leading-relaxed">
+              <blockquote className="mt-2 text-base lg:text-lg italic leading-relaxed">
                 “In order to further sustainable development and people's well-being, we are launching the PM Surya Ghar: Muft Bijli Yojana. This project, with an investment of over ₹75,000 crores, aims to light up 1 crore households by providing up to 300 units of free electricity every month.”
               </blockquote>
             </div>
@@ -170,12 +170,12 @@ export function PMSuryaGharSection() {
               </motion.div>
             ))}
 
-            <div className="sm:col-span-2 flex flex-wrap gap-3 mt-2">
+            <div className="sm:col-span-2 flex flex-col sm:flex-row items-center gap-4 mt-4">
               <a
                 href="https://pmsuryaghar.gov.in/"
                 target="_blank"
                 rel="noreferrer"
-                className="px-6 py-3 rounded-full gradient-primary text-primary-foreground font-semibold shadow-soft hover:shadow-glow transition-shadow inline-flex items-center gap-2"
+                className="h-14 px-8 rounded-full gradient-primary text-primary-foreground font-semibold shadow-soft hover:shadow-glow transition-all inline-flex items-center justify-center gap-2 whitespace-nowrap"
               >
                 Apply For Subsidy <ArrowRight className="h-4 w-4" />
               </a>
@@ -183,7 +183,7 @@ export function PMSuryaGharSection() {
                 href={CONTACT.whatsappHref}
                 target="_blank"
                 rel="noreferrer"
-                className="px-6 py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
+                className="h-14 px-8 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-colors inline-flex items-center justify-center whitespace-nowrap"
               >
                 Learn More
               </a>
