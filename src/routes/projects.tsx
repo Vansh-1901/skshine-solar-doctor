@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GallerySection } from "@/components/sections/Gallery";
-import { TestimonialsSection } from "@/components/sections/Testimonials";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/projects")({
   component: () => (
     <div className="pt-24">
       <GallerySection />
-      <TestimonialsSection />
     </div>
   ),
 });

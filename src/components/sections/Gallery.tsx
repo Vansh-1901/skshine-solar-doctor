@@ -6,28 +6,6 @@ import { X, ZoomIn } from "lucide-react";
 import { SectionTitle } from "../SectionTitle";
 import { listGalleryImages, type GalleryItem } from "@/lib/gallery.functions";
 
-import r1 from "@/assets/gallery-res-1.jpg";
-import r2 from "@/assets/gallery-res-2.jpg";
-import r3 from "@/assets/gallery-res-3.jpg";
-import c1 from "@/assets/gallery-com-1.jpg";
-import c2 from "@/assets/gallery-com-2.jpg";
-import c3 from "@/assets/gallery-com-3.jpg";
-import i1 from "@/assets/gallery-ind-1.jpg";
-import i2 from "@/assets/gallery-ind-2.jpg";
-import i3 from "@/assets/gallery-ind-3.jpg";
-
-const SEED: GalleryItem[] = [
-  { id: "s-r-1", category: "residential", url: r1, caption: "5kW On-Grid · Hyderabad Villa" },
-  { id: "s-r-2", category: "residential", url: r2, caption: "8kW Hybrid · Bengaluru" },
-  { id: "s-r-3", category: "residential", url: r3, caption: "3kW On-Grid · Pune Rowhouse" },
-  { id: "s-c-1", category: "commercial", url: c1, caption: "120kW Commercial · Mumbai" },
-  { id: "s-c-2", category: "commercial", url: c2, caption: "200kW Mall + Carport" },
-  { id: "s-c-3", category: "commercial", url: c3, caption: "60kW Hotel Rooftop" },
-  { id: "s-i-1", category: "industrial", url: i1, caption: "850kW Industrial Rooftop" },
-  { id: "s-i-2", category: "industrial", url: i2, caption: "1.2MW Warehouse Complex" },
-  { id: "s-i-3", category: "industrial", url: i3, caption: "Ground-Mount Solar Farm" },
-];
-
 const TABS = ["all", "residential", "commercial", "industrial"] as const;
 
 export function GallerySection() {
@@ -38,7 +16,7 @@ export function GallerySection() {
     staleTime: 5 * 60_000,
   });
 
-  const all = [...cloud, ...SEED];
+  const all = cloud;
   const [tab, setTab] = useState<typeof TABS[number]>("all");
   const [lightbox, setLightbox] = useState<GalleryItem | null>(null);
 

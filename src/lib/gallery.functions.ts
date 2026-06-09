@@ -13,13 +13,12 @@ export type GalleryItem = {
 
 const SIGNED_TTL = 60 * 60; // 1 hour
 
-export const listGalleryImages = createServerFn({ method: "GET" })
-  .handler(async (): Promise<GalleryItem[]> => {
+export const listGalleryImages = createServerFn({ method: "GET" }).handler(
+  async (): Promise<GalleryItem[]> => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data, error } = await supabaseAdmin
-      .from("gallery_images")
-      .select("id, category, storage_path, caption, sort_order, created_at")
-      .order("sort_order", { ascending: true })
+      .from("gallery")
+      .select("id, title, category, image_url, created_at")
       .order("created_at", { ascending: false });
     if (error) {
       console.error("[gallery] list failed", error);
@@ -28,20 +27,18 @@ export const listGalleryImages = createServerFn({ method: "GET" })
     if (!data || data.length === 0) return [];
     const items: GalleryItem[] = [];
     for (const row of data) {
-      const { data: signed } = await supabaseAdmin.storage
-        .from("project-gallery")
-        .createSignedUrl(row.storage_path, SIGNED_TTL);
-      if (signed?.signedUrl) {
-        items.push({
-          id: row.id,
-          category: row.category as GalleryItem["category"],
-          url: signed.signedUrl,
-          caption: row.caption,
-        });
-      }
+      if (!row.image_url || !row.category) continue;
+
+      items.push({
+        id: row.id,
+        category: row.category as GalleryItem["category"],
+        url: row.image_url,
+        caption: row.title,
+      });
     }
     return items;
-  });
+  },
+);
 
 export const deleteGalleryImage = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -49,32 +46,31 @@ export const deleteGalleryImage = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: row } = await supabaseAdmin
-      .from("gallery_images")
-      .select("storage_path")
+      .from("gallery")
+      .select("image_url")
       .eq("id", data.id)
       .maybeSingle();
-    if (row?.storage_path) {
-      await supabaseAdmin.storage.from("project-gallery").remove([row.storage_path]);
-    }
-    await supabaseAdmin.from("gallery_images").delete().eq("id", data.id);
+    await supabaseAdmin.from("gallery").delete().eq("id", data.id);
     return { ok: true as const };
   });
 
 export const registerGalleryImage = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) =>
-    z.object({
-      category: Category,
-      storage_path: z.string().min(1),
-      caption: z.string().max(200).optional(),
-    }).parse(data),
+    z
+      .object({
+        category: Category,
+        image_url: z.string().min(1),
+        title: z.string().max(200).optional(),
+      })
+      .parse(data),
   )
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { error } = await supabaseAdmin.from("gallery_images").insert({
+    const { error } = await supabaseAdmin.from("gallery").insert({
       category: data.category,
-      storage_path: data.storage_path,
-      caption: data.caption ?? null,
+      image_url: data.image_url,
+      title: data.title ?? null,
     });
     if (error) throw new Error(error.message);
     return { ok: true as const };

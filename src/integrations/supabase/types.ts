@@ -14,60 +14,207 @@ export type Database = {
   }
   public: {
     Tables: {
-      gallery_images: {
+      admins: {
         Row: {
-          caption: string | null
-          category: string
-          created_at: string
+          created_at: string | null
+          email: string
           id: string
-          sort_order: number
-          storage_path: string
         }
         Insert: {
-          caption?: string | null
-          category: string
-          created_at?: string
+          created_at?: string | null
+          email: string
           id?: string
-          sort_order?: number
-          storage_path: string
         }
         Update: {
-          caption?: string | null
-          category?: string
-          created_at?: string
+          created_at?: string | null
+          email?: string
           id?: string
-          sort_order?: number
-          storage_path?: string
+        }
+        Relationships: []
+      }
+      blogs: {
+        Row: {
+          content: string | null
+          cover_image: string | null
+          created_at: string | null
+          excerpt: string | null
+          id: string
+          slug: string | null
+          title: string | null
+        }
+        Insert: {
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string | null
+          excerpt?: string | null
+          id?: string
+          slug?: string | null
+          title?: string | null
+        }
+        Update: {
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string | null
+          excerpt?: string | null
+          id?: string
+          slug?: string | null
+          title?: string | null
+        }
+        Relationships: []
+      }
+      faqs: {
+        Row: {
+          answer: string
+          created_at: string | null
+          id: string
+          question: string
+          sort_order: number | null
+        }
+        Insert: {
+          answer: string
+          created_at?: string | null
+          id?: string
+          question: string
+          sort_order?: number | null
+        }
+        Update: {
+          answer?: string
+          created_at?: string | null
+          id?: string
+          question?: string
+          sort_order?: number | null
+        }
+        Relationships: []
+      }
+      gallery: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          id: string
+          image_url: string | null
+          title: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          id?: string
+          image_url?: string | null
+          title?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          id?: string
+          image_url?: string | null
+          title?: string | null
         }
         Relationships: []
       }
       leads: {
         Row: {
           city: string | null
-          created_at: string
+          created_at: string | null
           id: string
-          mobile: string
+          mobile: string | null
           monthly_bill: string | null
-          name: string
-          source: string
+          name: string | null
+          source: string | null
+          status: string | null
         }
         Insert: {
           city?: string | null
-          created_at?: string
+          created_at?: string | null
           id?: string
-          mobile: string
+          mobile?: string | null
           monthly_bill?: string | null
-          name: string
-          source?: string
+          name?: string | null
+          source?: string | null
+          status?: string | null
         }
         Update: {
           city?: string | null
-          created_at?: string
+          created_at?: string | null
           id?: string
-          mobile?: string
+          mobile?: string | null
           monthly_bill?: string | null
-          name?: string
-          source?: string
+          name?: string | null
+          source?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
+      settings: {
+        Row: {
+          address: string | null
+          company_name: string | null
+          email: string | null
+          facebook: string | null
+          hero_subtitle: string | null
+          hero_title: string | null
+          id: string
+          instagram: string | null
+          linkedin: string | null
+          phone: string | null
+          updated_at: string | null
+          whatsapp: string | null
+          youtube: string | null
+        }
+        Insert: {
+          address?: string | null
+          company_name?: string | null
+          email?: string | null
+          facebook?: string | null
+          hero_subtitle?: string | null
+          hero_title?: string | null
+          id?: string
+          instagram?: string | null
+          linkedin?: string | null
+          phone?: string | null
+          updated_at?: string | null
+          whatsapp?: string | null
+          youtube?: string | null
+        }
+        Update: {
+          address?: string | null
+          company_name?: string | null
+          email?: string | null
+          facebook?: string | null
+          hero_subtitle?: string | null
+          hero_title?: string | null
+          id?: string
+          instagram?: string | null
+          linkedin?: string | null
+          phone?: string | null
+          updated_at?: string | null
+          whatsapp?: string | null
+          youtube?: string | null
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          created_at: string | null
+          customer_name: string | null
+          id: string
+          rating: number | null
+          review: string | null
+          visible: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          customer_name?: string | null
+          id?: string
+          rating?: number | null
+          review?: string | null
+          visible?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          customer_name?: string | null
+          id?: string
+          rating?: number | null
+          review?: string | null
+          visible?: boolean | null
         }
         Relationships: []
       }

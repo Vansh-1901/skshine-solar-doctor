@@ -7,7 +7,6 @@ import { ServicesSection } from "@/components/sections/Services";
 import { ComparisonSection } from "@/components/sections/Comparison";
 import { WhyChooseSection } from "@/components/sections/WhyChoose";
 import { GallerySection } from "@/components/sections/Gallery";
-import { TestimonialsSection } from "@/components/sections/Testimonials";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { FAQsSection } from "@/components/sections/FAQs";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -38,7 +37,6 @@ function Index() {
       <ComparisonSection />
       <WhyChooseSection />
       <GallerySection />
-      <TestimonialsSection />
       <BlogSection limit={6} />
       <FAQsSection />
       <ContactSection />

@@ -19,13 +19,17 @@ function createSupabaseAdminClient() {
     throw new Error(message);
   }
 
-  return createClient<Database>(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
-    auth: {
-      storage: undefined,
-      persistSession: false,
-      autoRefreshToken: false,
-    }
-  });
+  console.log("SERVER SUPABASE URL:", SUPABASE_URL);
+  console.log("SERVER SERVICE KEY EXISTS:", !!SUPABASE_SERVICE_ROLE_KEY);
+
+  const client = createClient<Database>(
+    SUPABASE_URL,
+    SUPABASE_SERVICE_ROLE_KEY,
+  );
+
+  console.log("SUPABASE CLIENT CREATED");
+
+  return client;
 }
 
 let _supabaseAdmin: ReturnType<typeof createSupabaseAdminClient> | undefined;
