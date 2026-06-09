@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { ArrowRight, BadgeIndianRupee, Leaf, Sun, Wallet } from "lucide-react";
 import pm from "@/assets/pm-portrait.jpg";
-import { SectionTitle } from "../SectionTitle";
 import { CountdownTimer } from "../CountdownTimer";
 import { CONTACT } from "@/lib/contact";
 
@@ -13,25 +13,134 @@ const BENEFITS = [
 ];
 
 export function PMSuryaGharSection() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], [60, -80]);
+
   return (
-    <section id="subsidy" className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-secondary to-background">
+    <section ref={sectionRef} id="subsidy" className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-secondary to-background">
       <div className="absolute top-20 left-10 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
       <div className="absolute bottom-20 right-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
 
       <div className="container mx-auto px-4 max-w-7xl relative">
-        <SectionTitle
-          eyebrow="PM Surya Ghar: Muft Bijli Yojana"
-          title={<>Up To <span className="text-gradient">300 Units Free Electricity</span> Every Month</>}
-          description="A Government of India scheme to bring affordable rooftop solar to 1 crore households nationwide."
-        />
+        <div className="text-center max-w-4xl mx-auto mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-4"
+          >
+            PM Surya Ghar: Muft Bijli Yojana
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 1.2 }}
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gradient"
+          >
+            {`Up To 300 Units Free Electricity Every Month`.split('').map((char, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.05,
+                  delay: index * 0.04,
+                }}
+                className={char === ' ' ? 'inline-block w-2' : ''}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </motion.span>
+            ))}
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="mt-6 text-muted-foreground text-lg"
+          >
+            A Government of India scheme to bring affordable rooftop solar to 1 crore households nationwide.
+          </motion.p>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="bg-card rounded-3xl border border-border shadow-elegant p-8 lg:p-12 mb-16"
+        >
+          <h3 className="text-center font-display text-4xl font-bold mb-10">
+            <span className="text-gradient">Benefits</span>
+          </h3>
+
+          <div className="grid lg:grid-cols-2 gap-10">
+            <div>
+              <h4 className="text-center font-display text-3xl font-bold mb-8">
+                Subsidy for <span className="text-gradient">Residential</span> Households
+              </h4>
+
+              <div className="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                  <div className="text-4xl font-bold text-primary">₹30,000</div>
+                  <div className="text-xl font-semibold mt-1">per kW</div>
+                  <p className="text-muted-foreground mt-2">Up to 2 kW</p>
+                </div>
+
+                <div>
+                  <div className="text-4xl font-bold text-primary">₹18,000</div>
+                  <div className="text-xl font-semibold mt-1">per kW</div>
+                  <p className="text-muted-foreground mt-2">Additional capacity up to 3 kW</p>
+                </div>
+
+                <div>
+                  <div className="text-4xl font-bold text-primary">₹78,000</div>
+                  <div className="text-xl font-semibold mt-1">Maximum</div>
+                  <p className="text-muted-foreground mt-2">Total subsidy cap</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:border-l lg:pl-10 border-border">
+              <h4 className="text-center font-display text-3xl font-bold mb-8">
+                Subsidy for <span className="text-gradient">GHS/RWA</span>
+              </h4>
+
+              <div className="text-center">
+                <div className="text-5xl font-bold text-primary">₹18,000</div>
+                <div className="text-2xl font-semibold mt-1">per kW</div>
+
+                <p className="text-muted-foreground mt-6 leading-relaxed max-w-xl mx-auto">
+                  For common facilities including EV charging. Support available up to
+                  <strong> 500 kW capacity</strong> (maximum 3 kW per house), inclusive of
+                  rooftop solar systems installed by individual residents.
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-elegant"
+            style={{ y: imageY }}
+            initial={{ opacity: 0, y: 30, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{
+              duration: 1.2,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-elegant hover:scale-[1.01] transition-transform duration-700"
           >
             <img src={pm} alt="Prime Minister of India" className="w-full h-full object-cover aspect-[4/5]" width={1024} height={1280} loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/40 to-transparent" />
@@ -47,11 +156,11 @@ export function PMSuryaGharSection() {
             {BENEFITS.map((b, i) => (
               <motion.div
                 key={b.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="glass rounded-2xl p-6 hover-lift border border-white/40"
+                initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.9, delay: i * 0.18 }}
+                className="glass rounded-2xl p-6 hover-lift border border-white/40 hover:scale-[1.05] hover:-translate-y-2 transition-all duration-500"
               >
                 <div className="h-12 w-12 rounded-xl gradient-primary text-primary-foreground inline-flex items-center justify-center mb-4 shadow-soft">
                   <b.icon className="h-6 w-6" />
@@ -83,10 +192,10 @@ export function PMSuryaGharSection() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.9 }}
           className="mt-16 max-w-3xl mx-auto text-center"
         >
           <div className="inline-flex px-3 py-1 rounded-full bg-destructive/10 text-destructive text-xs font-semibold uppercase tracking-wider">

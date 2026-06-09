@@ -7,7 +7,7 @@ import { CONTACT } from "@/lib/contact";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[100svh] flex items-center pt-20 pb-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-32 md:pt-36 pb-32 overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <img src={hero} alt="Premium rooftop solar installation" className="w-full h-full object-cover" width={1920} height={1080} />
         <div className="absolute inset-0 gradient-hero" />
@@ -30,7 +30,7 @@ export function HeroSection() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-dark text-xs font-semibold text-accent-glow uppercase tracking-widest">
             <span className="h-1.5 w-1.5 rounded-full bg-accent-glow animate-pulse" /> {CONTACT.tagline}
           </div>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.05] mt-5">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mt-5">
             Your <span className="text-gradient bg-gradient-to-r from-accent-glow to-sun bg-clip-text text-transparent">Solar Doctor</span><br />
             for a Sustainable Future
           </h1>
@@ -73,14 +73,14 @@ export function HeroSection() {
       </div>
 
       {/* Stats */}
-      <div className="absolute bottom-0 inset-x-0 translate-y-1/2 z-20 px-4">
+      <div className="absolute bottom-0 inset-x-0 translate-y-[35%] md:translate-y-1/2 z-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 bg-card rounded-3xl shadow-elegant p-4 md:p-6 border border-border"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 bg-card rounded-3xl shadow-elegant p-4 md:p-6 border border-border min-h-[140px]"
           >
             {[
               { v: 1200, s: "+", label: "Projects Completed", icon: BadgeCheck },
