@@ -29,7 +29,7 @@ function Index() {
   return (
     <>
       <HeroSection />
-      <div className="h-24 md:h-20" />{/* spacer for floating stat card */}
+      
       <PMSuryaGharSection />
       <CapacityGuideSection />
       <CalculatorSection />

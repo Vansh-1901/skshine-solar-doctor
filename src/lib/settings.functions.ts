@@ -31,26 +31,28 @@ export const updateSettings = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-   if (!data.id) {
-  throw new Error("Settings ID missing");
-}
+   const { data: current } = await supabaseAdmin.from("settings").select("id").limit(1).single();
 
-const { error } = await supabaseAdmin
-  .from("settings")
-  .update({
-    company_name: data.company_name,
-    phone: data.phone,
-    whatsapp: data.whatsapp,
-    email: data.email,
-    address: data.address,
-    facebook: data.facebook,
-    instagram: data.instagram,
-    linkedin: data.linkedin,
-    youtube: data.youtube,
-    hero_title: data.hero_title,
-    hero_subtitle: data.hero_subtitle,
-  })
-  .eq("id", data.id);
+   if (!current) {
+     throw new Error("No settings record found");
+   }
+
+   const { error } = await supabaseAdmin
+     .from("settings")
+     .update({
+       company_name: data.company_name,
+       phone: data.phone,
+       whatsapp: data.whatsapp,
+       email: data.email,
+       address: data.address,
+       facebook: data.facebook,
+       instagram: data.instagram,
+       linkedin: data.linkedin,
+       youtube: data.youtube,
+       hero_title: data.hero_title,
+       hero_subtitle: data.hero_subtitle,
+     })
+     .eq("id", current.id);
 
     if (error) throw new Error(error.message);
 
