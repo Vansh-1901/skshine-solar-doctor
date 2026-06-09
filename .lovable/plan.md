@@ -51,7 +51,7 @@ A premium, conversion-focused solar website built on TanStack Start + Tailwind v
 
 ### Placeholders
 
-- Phone: `+91-9XXXXXXXXX`, WhatsApp: `+91-9XXXXXXXXX`, Email: `info@skshine.in`, Address: `Office address — update in code`. Centralized in `src/lib/contact.ts` for easy swap.
+- Phone: `+91-7004422488`, WhatsApp: `+91-7004422488`, Email: `info@skshine.in`, Address: `Office address — update in code`. Centralized in `src/lib/contact.ts` for easy swap.
 
 ### SEO
 
