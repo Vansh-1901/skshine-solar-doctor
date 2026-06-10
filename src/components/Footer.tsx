@@ -41,6 +41,8 @@ export function Footer() {
           <h4 className="font-semibold mb-4">Quick Links</h4>
           <ul className="space-y-2 text-sm text-primary-foreground/80">
             {[
+              ["/", "Home"],
+              ["/about", "About Us"],
               ["/services", "Services"],
               ["/projects", "Projects"],
               ["/subsidy", "PM Surya Ghar"],
