@@ -4,8 +4,23 @@ import { Phone, MessageCircle, ArrowRight, ShieldCheck, BadgeCheck, Zap, Users }
 import hero from "@/assets/hero-solar.jpg";
 import { Counter } from "../Counter";
 import { CONTACT } from "@/lib/contact";
+import { getSettings } from "@/lib/settings.functions";
+import { useEffect, useState } from "react";
+
+interface SettingsData {
+  hero_title?: string | null;
+  hero_subtitle?: string | null;
+}
 
 export function HeroSection() {
+  const [settings, setSettings] = useState<SettingsData | null>(null);
+
+  useEffect(() => {
+    getSettings()
+      .then((data: any) => setSettings(data))
+      .catch(console.error);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center pt-32 md:pt-36 pb-32 overflow-hidden">
       <div className="absolute inset-0 -z-10">
@@ -38,15 +53,19 @@ export function HeroSection() {
             {CONTACT.tagline}
           </div>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mt-5">
-            Your{" "}
-            <span className="text-gradient bg-gradient-to-r from-accent-glow to-sun bg-clip-text text-transparent">
-              Solar Doctor
-            </span>
-            <br />
-            for a Sustainable Future
+            {settings?.hero_title || (
+              <>
+                Your {" "}
+                <span className="text-gradient bg-gradient-to-r from-accent-glow to-sun bg-clip-text text-transparent">
+                  Solar Doctor
+                </span>
+                <br />
+                for a Sustainable Future
+              </>
+            )}
           </h1>
           <p className="mt-4 text-lg lg:text-xl text-white/85 font-medium">
-            Trusted solar solutions for residential, commercial and industrial energy needs.
+            {settings?.hero_subtitle || "Trusted solar solutions for residential, commercial and industrial energy needs."}
           </p>
           <p className="mt-3 text-sm lg:text-base text-white/70 leading-relaxed max-w-2xl">
             SK Shine Enterprises provides complete solar energy solutions including On-Grid,

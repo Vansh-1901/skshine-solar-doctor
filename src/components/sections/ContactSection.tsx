@@ -1,16 +1,24 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { Phone, MessageCircle, MapPin, Mail, Loader2, CheckCircle2, Navigation } from "lucide-react";
 import { SectionTitle } from "../SectionTitle";
 import { CONTACT } from "@/lib/contact";
 import { submitLead } from "@/lib/leads.functions";
+import { getSettings } from "@/lib/settings.functions";
 
 export function ContactSection() {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const send = useServerFn(submitLead);
+  const [settings, setSettings] = useState<any>(null);
+
+  useEffect(() => {
+    getSettings()
+      .then((data: any) => setSettings(data))
+      .catch(console.error);
+  }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -54,7 +62,13 @@ export function ContactSection() {
           >
             <InfoCard icon={Phone} label="Call us anytime" value={CONTACT.phone} href={CONTACT.phoneHref} cta="Call Now" />
             <InfoCard icon={MessageCircle} label="WhatsApp chat" value={CONTACT.whatsapp} href={CONTACT.whatsappHref} cta="WhatsApp Now" external />
-            <InfoCard icon={Mail} label="Email" value={CONTACT.email} href={CONTACT.emailHref} cta="Send email" />
+            <InfoCard
+              icon={Mail}
+              label="Email"
+              value={settings?.email || CONTACT.email}
+              href={`mailto:${settings?.email || CONTACT.email}`}
+              cta="Send email"
+            />
             <InfoCard icon={MapPin} label="Office address" value={CONTACT.address} href={CONTACT.mapsHref} cta="Get Directions" external Icon2={Navigation} />
 
             <div className="rounded-3xl overflow-hidden border border-border shadow-soft aspect-[16/10] bg-card">

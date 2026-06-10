@@ -1,9 +1,19 @@
 import { Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from "lucide-react";
 import { CONTACT } from "@/lib/contact";
 import logo from "@/assets/logo.png";
+import { getSettings } from "@/lib/settings.functions";
 
 export function Footer() {
+  const [settings, setSettings] = useState<any>(null);
+
+  useEffect(() => {
+    getSettings()
+      .then((data: any) => setSettings(data))
+      .catch(console.error);
+  }, []);
+
   return (
     <footer className="bg-primary text-primary-foreground mt-20">
       <div className="container mx-auto px-4 max-w-7xl py-14 grid gap-10 md:grid-cols-4">
@@ -61,7 +71,7 @@ export function Footer() {
           <h4 className="font-semibold mb-4">Contact</h4>
           <ul className="space-y-3 text-sm text-primary-foreground/80">
             <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 text-accent-glow shrink-0" /> {CONTACT.phone}</li>
-            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 text-accent-glow shrink-0" /> {CONTACT.email}</li>
+            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 text-accent-glow shrink-0" /> {settings?.email || CONTACT.email}</li>
             <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 text-accent-glow shrink-0" /> {CONTACT.address}</li>
           </ul>
         </div>

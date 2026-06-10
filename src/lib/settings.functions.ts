@@ -19,11 +19,16 @@ const SettingsSchema = z.object({
 export const getSettings = createServerFn({ method: "GET" }).handler(async () => {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-  const { data, error } = await supabaseAdmin.from("settings").select("*").limit(1).single();
+  const { data, error } = await supabaseAdmin
+    .from("settings")
+    .select("*");
+
+  console.log("[SETTINGS] DATA:", data);
+  console.log("[SETTINGS] ERROR:", error);
 
   if (error) throw new Error(error.message);
 
-  return data;
+  return data?.[0] ?? null;
 });
 
 export const updateSettings = createServerFn({ method: "POST" })
@@ -31,8 +36,17 @@ export const updateSettings = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-   const { data: current } = await supabaseAdmin.from("settings").select("id").limit(1).single();
+   const { data: settingsRows, error: settingsError } = await supabaseAdmin
+     .from("settings")
+     .select("id")
+     .limit(1);
 
+   console.log("[UPDATE SETTINGS] ROWS:", settingsRows);
+   console.log("[UPDATE SETTINGS] ERROR:", settingsError);
+
+   if (settingsError) throw new Error(settingsError.message);
+
+   const current = settingsRows?.[0];
    if (!current) {
      throw new Error("No settings record found");
    }
